@@ -1,0 +1,544 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "server",
+    "version": "1.0.0",
+    "title": "Swagger :)",
+    "contact": {
+      "email": "poshta@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Profile Request",
+      "description": "API for profile requests"
+    },
+    {
+      "name": "Tasks Request",
+      "description": "API for tasks requests"
+    },
+    {
+      "name": "Families Request",
+      "description": "API for families requests"
+    }
+  ],
+  "paths": {
+    "/resources/profiles/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "description": "Profile id to get (example: 9cae4c108fa2f2474a133b50373f1f01)",
+          "schema": {
+              "$ref": "#/components/schemas/id"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Get profile by ID",
+        "tags": [
+          "Profile Request"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/profile"
+            }
+          },
+          "404": {
+            "description": "Profile id not found"
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Edit profile by ID",
+        "tags": [
+          "Profile Request"
+        ],
+        "requestBody": {
+          "description": "Profile Request Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/profile"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Profile id not found"
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/resources/profiles/": {
+      "post": {
+        "summary": "Create new profile",
+        "tags": [
+          "Profile Request"
+        ],
+        "requestBody": {
+          "description": "Profile Request Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/profile"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "get": {
+        "parameters": [
+          {
+            "name": "username",
+            "in": "body",
+            "required": true,
+            "description": "First username letters",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "tags": [
+          "Profile Request"
+        ],
+        "summary": "Get all profiles id started with username",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                  "$ref": "#/components/schemas/task"
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/resources/tasks/{user_id}": {
+      "parameters": [
+        {
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "description": "User ID (example: 9cae4c108fa2f2474a133b50373f2972)",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Get all tasks",
+        "tags": [
+          "Tasks Request"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/task"
+                }
+            }
+          },
+          "404": {
+            "description": "User id not found"
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new task",
+        "tags": [
+          "Tasks Request"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "requestBody": {
+          "description": "Task Request Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/task"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            }
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/resources/tasks/{user_id}/{id}": {
+      "parameters": [
+        {
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "description": "User ID (example: 9cae4c108fa2f2474a133b50373f2972)",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Task ID (example: 9cae4c108fa2f2474a133b5037960869)",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Tasks Request"
+        ],
+        "summary": "Get task by ID of user with user_id",
+
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/task"
+            }
+          },
+          "404": {
+            "description": "User or task id not found"
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tasks Request"
+        ],
+        "summary": "Edit task by ID of user with user_id",
+        "produces": [
+          "application/json"
+        ],
+        "requestBody": {
+          "description": "Profile Request Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/task"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "User or task id not found"
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tasks Request"
+        ],
+        "summary": "Get task by ID of user with user_id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "User or task id not found"
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/resources/families/": {
+      "post": {
+        "tags": [
+          "Families Request"
+        ],
+        "summary": "Create new family",
+        "requestBody": {
+          "description": "Family Request Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/family"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            }
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/resources/families/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Family ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Families Request"
+        ],
+        "summary": "Get family by ID",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/family"
+            }
+          },
+          "404": {
+            "description": "Family id not found"
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Edit a family by ID",
+        "tags": [
+          "Families Request"
+        ],
+        "requestBody": {
+          "description": "Family Request Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/family"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Family id not found"
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/resources/families/{id}/{user_id}": {
+      "parameters": [
+        {
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "description": "User ID",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Family ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "delete": {
+        "tags": [
+          "Families Request"
+        ],
+        "summary": "Delete member of family",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Family or user id not found"
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "id": {
+        "properties": {
+          "uuid": {
+            "type": "string"
+          }
+        }
+      },
+      "profile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "age_status": {
+            "type": "string"
+          },
+          "birthday": {
+            "type": "string"
+          },
+          "point": {
+            "type": "integer"
+          },
+          "family_id": {
+            "type": "string"
+          }
+        }
+      },
+      "task": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "deadline": {
+            "type": "string"
+          },
+          "value": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "family_id": {
+            "type": "string"
+          }
+        }
+      },
+      "family": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "creator_id": {
+            "type": "string"
+          },
+          "with_rights": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "w_o_rights": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

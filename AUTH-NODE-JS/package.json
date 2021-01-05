@@ -1,0 +1,35 @@
+{
+  "name": "auth-service",
+  "version": "0.0.3",
+  "main": "index",
+  "scripts": {
+    "window-auth": "nodemon -r esm index",
+    "linux-auth": "nodemon esm index",
+    "load": "npm i",
+    "test": "nodemon -r esm ..",
+    "install-esm": "npm install --save esm"
+  },
+  "author": "Oleh",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.11",
+    "esm": "^3.2.25",
+    "express-session": "^1.16.2",
+    "jsonwebtoken": "^8.5.1",
+    "nedb": "^1.8.0",
+    "swagger-jsdoc": "^3.4.0",
+    "swagger-node-express": "^2.1.3",
+    "typescript": "^3.6.3",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "cross-env": "^5.2.0",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1"
+  },
+  "engines": {
+    "node": ">=8.10.0"
+  }
+}

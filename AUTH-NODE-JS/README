@@ -1,0 +1,14 @@
+0.
+    git clone
+
+1.
+    LINUX: sudo apt install npm
+    WINDOWS: https://phoenixnap.com/kb/install-node-js-npm-on-windows
+
+2.
+    npm i
+    npm install-esm
+
+3.
+    npm run window-auth 
+    npm run linux-auth

@@ -1,0 +1,242 @@
+{
+    "swagger": "2.0",
+        "info": {
+            "version": "0.0.2",
+            "title": "Childify auth service",
+            "description": "Auth service"
+        },
+        "basePath":"/",
+        "servers": [
+            {
+                "url": "/",
+                "description": "Local Dev"
+            }
+        ],
+        "schemes": [
+            "http"
+        ],
+        "consumes": [
+            "application/json",
+            "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+            "application/json",
+            "application/x-www-form-urlencoded"
+        ],
+        "paths": {
+            "/signIn": {
+                "post": {
+                    "tags": [
+                        "Sign in"
+                    ],
+                    "summary": "Login a new User in system",
+                    "parameters": [
+                        {
+                            "name": "user",
+                            "in": "body",
+                            "required": false,
+                            "schema": {
+                                "$ref": "#/definitions/user"
+                            }
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "SUCCESS",
+                            "schema": {
+                                "$ref": "#/definitions/tokens"
+                            }
+                        },
+                        "403": {
+                            "description": "Bad post data."
+                        },
+                        "400": {
+                        "description": "Failed. Bad post data."
+                        }
+                    }
+                }
+            },
+            "/signUp": {
+                "post": {
+                    "tags": [
+                        "Sign up"
+                    ],
+                    "summary": "Register a new user in system",
+                    "parameters": [
+                        {
+                            "name": "user",
+                            "in": "body",
+                            "required": false,
+                            "schema": {
+                                "$ref": "#/definitions/user"
+                            }
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "SUCCESS"
+                        },
+                        "400": {
+                            "description": "Failed. Bad post data."
+                        },
+                        "403": {
+                            "description": "Bad post data."
+                        }
+                    }
+                }
+            },
+            "/refresh": {
+                "put": {
+                    "tags": [
+                        "Refresh"
+                    ],
+                    "summary": "Refresh tokens",
+                    "parameters": [
+                        {
+                            "name": "user",
+                            "in": "body",
+                            "required": false,
+                            "schema": {
+                                "$ref": "#/definitions/refreshToken"
+                            }
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "SUCCESS",
+                            "schema": {
+                                "$ref": "#/definitions/tokens"
+                            }
+                        },
+                        "400": {
+                            "description": "Failed. Bad post data."
+                        },
+                        "403": {
+                            "description": "Bad post data."
+                        }
+                    }
+                }
+            },
+            "/signOut": {
+                "delete": {
+                    "tags": [
+                        "Sign out"
+                    ],
+                    "summary": "Delete tokens",
+                    "parameters": [
+                        {
+                            "name": "user",
+                            "in": "body",
+                            "required": false,
+                            "schema": {
+                                "$ref": "#/definitions/tokens"
+                            }
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "SUCCESS"
+                        },
+                        "400": {
+                            "description": "Failed. Bad post data."
+                        },
+                        "403": {
+                            "description": "Bad post data."
+                        }
+                    }
+                }
+            },
+            "/deleteUser": {
+                "delete": {
+                    "tags": [
+                        "Delete User"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "user",
+                            "in": "body",
+                            "required": false,
+                            "schema": {
+                                "$ref": "#/definitions/accessToken"
+                            }
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "SUCCESS"
+                        },
+                        "400": {
+                            "description": "Failed. Bad post data."
+                        },
+                        "403": {
+                            "description": "Bad post data."
+                        }
+                    }
+                }
+            }
+        },
+        "definitions": {
+            "id": {
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    }
+                }
+            },
+            "user": {
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "tokens": {
+                "properties": {
+                    "accessToken": {
+                        "type": "string"
+                    },
+                    "refreshToken": {
+                        "type": "string"
+                    }
+                }
+            },
+            "accessToken": {
+                "properties": {
+                    "accessToken": {
+                        "type": "string"
+                    }
+                }
+            },
+            "refreshToken": {
+                "properties": {
+                    "refreshToken": {
+                        "type": "string"
+                    }
+                }
+            },
+            "users": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/user"
+                }
+            }
+        }
+}
